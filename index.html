@@ -975,7 +975,7 @@ const VITEMS={
 "3":{ref:"1.5–6",items:[
  ["passus",[6],["passus est"],"est is left out."],
  ["Latiō",[6,8],["in Latium"],"Poetic dative of direction: in is omitted."],
- ["inferretque deōs",[1],["et deōs portāret","et deōs ferret"],"inferre (carry in) is the grander word; the Simplicior uses portābat."],
+ ["inferretque deōs",[1],["et deōs portāret","et deōs ferret"],"inferre (carry in) is the grander word; ordinary Latin would say portābat."],
  ["dum conderet urbem",[4],["dum urbem novam condere temptābat"],"Compressed: 'until he could found', i.e. while he was striving to found a city."]]},
 "4":{ref:"1.6–7",items:[
  ["genus unde Latīnum",[6,7],["unde genus Latīnum ortum est","inde nātī sunt Latīnī"],"The verb (ortum est) is omitted, and unde is postponed."],
@@ -1001,7 +1001,7 @@ const VITEMS={
  ["Tyriī tenuēre colōnī",[6,4],["quam colōnī Tyriī tenuērunt","colōnī Tyriī urbem tenuērunt"],"A parenthesis with the object (the city / quam) left out."],
  ["Ītaliam contrā",[7],["contrā Ītaliam"],"The preposition comes after its object (anastrophe)."],
  ["Tiberīnaque longē ōstia",[7,2],["et procul ab ōstiō Tiberis","ōstia Tiberis"],"Tiberīna ... ōstia is split, and the adjective replaces the genitive Tiberis."],
- ["longē",[1],["procul"],"longē = far off; the Simplicior uses procul."]]},
+ ["longē",[1],["procul"],"longē = far off; procul is the plainer word."]]},
 "9":{ref:"1.14",items:[
  ["opum",[1],["dīvitiārum"],"Handout: dīvitiae → opēs."],
  ["studiīsque asperrima bellī",[4,7],["et valdē fortis in bellō","et ferōcissima in bellō"],"Compressed: 'very fierce in the pursuits of war' = very warlike. studiīs ... bellī is also split."]]},
@@ -1009,7 +1009,7 @@ const VITEMS={
  ["fertur",[1],["dīcitur"],"ferre in the sense 'it is said'."],
  ["terrīs magis omnibus ūnam",[7],["ūnam magis quam omnēs terrās"],"terrīs ... omnibus is split by magis; the ablative of comparison replaces quam."],
  ["posthabitā ... Samō",[5,7],["etiam Samō posthabitā","Samum minōris aestimāvit"],"Ablative absolute: 'with Samos ranked second'; the two words are split."],
- ["coluisse",[1],["amāvisse"],"colere (cherish) is the loftier word; the Simplicior has amāvisse."]]},
+ ["coluisse",[1],["amāvisse"],"colere (cherish) is the loftier word; ordinary Latin would say amāvisse."]]},
 "11":{ref:"1.16–18",items:[
  ["hīc illius arma, hīc currus fuit",[6],["hīc illius arma fuērunt, hīc currus fuit","ibi arma et currus Iūnōnis erant"],"fuērunt is left out with arma."],
  ["dea",[2],["Iūnō"],"An epithet in place of her name."],
@@ -1272,9 +1272,7 @@ function render(){
   const u=UNITS[st.u];
   let h=`<div class="rghead"><div><div class="lab">Aeneid ${u.ref} · Līnea ${u.num} in your handout</div><div class="vname">Unmask the transformations</div><div class="vmean">For each numbered expression, name the type of transformation and give more ordinary Latin or a fuller expression.</div></div>
     <div class="row"><button class="btn gold" id="vgRandom">&#127922; Random line</button></div></div>
-    <div class="sec"><div class="vgrid ${st.hideSimp?"one":""}"><div><div class="lab">Lātīna Vera</div><div class="vera">${hiVera(u)}</div></div>
-    ${st.hideSimp?"":`<div><div class="lab">Latina Simplicior (DCC 600)</div><div class="simp">${H(u.simp)}</div></div>`}</div>
-    <label class="checks" style="margin-top:10px"><span><input type="checkbox" id="vgHide" ${st.hideSimp?"checked":""}> Challenge: hide the Simplicior</span></label></div>
+    <div class="sec"><div class="lab">Lātīna Vera</div><div class="vera">${hiVera(u)}</div></div>
     <div class="sec"><table><tr><th style="width:36px">#</th><th>Words from the passage</th><th>Type of transformation</th><th>More ordinary Latin or a fuller expression</th></tr>`;
   u.items.forEach((it,i)=>{
     h+=`<tr><td class="tl" style="width:36px">${i+1}</td><td class="vexpr">${H(it[0])}</td><td>${cell(i+":t","1–8 or name",it,"t")}</td><td>${cell(i+":l","Ordinary Latin",it,"l")}${st.checked?`<div class="fb" style="color:var(--muted)">${H(it[3])}</div>`:""}</td></tr>`;
@@ -1334,7 +1332,6 @@ function bind(){
   document.querySelectorAll("#vgMain [data-ov]").forEach(a=>a.onclick=()=>{collect();st.over.add(a.dataset.ov);
     const u=UNITS[st.u]; const it=u.items[+a.dataset.ov.split(":")[0]]; const key=u.ref+"|"+it[0]+"|Ordinary Latin"; const m=VGM.find(x=>x.key===key); if(m){m.n--; if(m.n<=0) VGM.splice(VGM.indexOf(m),1); LS.set("vg.mistakes",VGM);}
     record(); render();});
-  el("vgHide").onchange=e=>{collect();st.hideSimp=e.target.checked;render();};
   el("vgCheck").onclick=check;
   el("vgClear").onclick=()=>{st.vals={};st.res={};st.checked=false;st.over=new Set();st.id=null;render();};
   el("vgNext").onclick=()=>{st.id=null;open((st.u+1)%UNITS.length);};
